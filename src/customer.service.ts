@@ -1,7 +1,6 @@
 import Stripe from 'stripe';
 import {Inject, Injectable} from '@nestjs/common';
 import {SERVER_CONFIG_TOKEN, ServerConfiguration} from './nx-stripe.module.di';
-import {keyBy, mapValues, reduce} from 'lodash';
 
 
 export class Customer {
@@ -27,7 +26,7 @@ export class CustomerService {
     });
   }
 
-  public async createCustomer(customer: Customer): Promise<Customer> {
+  public async create(customer: Customer): Promise<Customer> {
     return this.stripe.customers.create({
       name: customer.name,
       email: customer.email,

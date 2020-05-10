@@ -1,7 +1,7 @@
 import Stripe from 'stripe';
 import {Inject, Injectable} from '@nestjs/common';
 import {SERVER_CONFIG_TOKEN, ServerConfiguration} from './nx-stripe.module.di';
-import {keyBy, mapValues, reduce} from 'lodash';
+import {flatten, keyBy, mapValues, reduce} from 'lodash';
 
 export class Product {
   public id: string;
@@ -51,7 +51,7 @@ export class ProductService {
     });
   }
 
-  public async getProducts(): Promise<Product[]> {
+  public async getAll(): Promise<Product[]> {
     const [pricing, feature] = await Promise.all([this.stripe.plans.list(), this.stripe.products.list()]);
 
     const productsKeyById = mapValues(keyBy(feature.data, 'id'), 'metadata.product');
@@ -90,5 +90,12 @@ export class ProductService {
 
       return acc;
     }, []);
+  }
+
+  public async getPlanById(planId: string): Promise<Plan> {
+    const products: Product[] = await this.getAll();
+    const plans: Plan[] = flatten(products.map((p: Product) => p.plans));
+
+    return plans.find((p: Plan) => p.id === planId);
   }
 }

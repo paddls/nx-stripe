@@ -3,6 +3,7 @@ import {ProductService} from './product.service';
 import {AppController} from './app.controller';
 import {SERVER_CONFIG_TOKEN, ServerConfiguration} from './nx-stripe.module.di';
 import {CustomerService} from './customer.service';
+import {SubscriptionService} from './subscription.service';
 
 
 @Module({
@@ -27,8 +28,12 @@ export class NxStripeModule {
         },
         ProductService,
         CustomerService,
+        SubscriptionService,
       ],
       exports: [],
     };
   }
 }
+
+
+// TODO @RMA stripe error handling
