@@ -1,10 +1,12 @@
-import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import {Module} from '@nestjs/common';
+import {NxStripeModule} from './nx-stripe.module';
 
 @Module({
-  imports: [],
-  controllers: [AppController],
-  providers: [AppService],
+  imports: [
+    NxStripeModule.forServer({
+      privateKey: 'sk_test_vd9KiqO6bCnvJFQJNqA1vni300xxtid6dS'
+    })
+  ],
 })
-export class AppModule {}
+export class AppModule {
+}
