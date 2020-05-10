@@ -2,6 +2,7 @@ import {DynamicModule, Module} from '@nestjs/common';
 import {ProductService} from './product.service';
 import {AppController} from './app.controller';
 import {SERVER_CONFIG_TOKEN, ServerConfiguration} from './nx-stripe.module.di';
+import {CustomerService} from './customer.service';
 
 
 @Module({
@@ -25,6 +26,7 @@ export class NxStripeModule {
           useValue: config
         },
         ProductService,
+        CustomerService,
       ],
       exports: [],
     };
