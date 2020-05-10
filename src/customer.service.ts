@@ -27,6 +27,7 @@ export class CustomerService {
   }
 
   public async create(customer: Customer): Promise<Customer> {
+    // TODO @RMA add identifier
     return this.stripe.customers.create({
       name: customer.name,
       email: customer.email,

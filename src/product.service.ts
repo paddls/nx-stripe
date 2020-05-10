@@ -15,6 +15,7 @@ export class Product {
 export class Plan {
   public id: string;
   public lines: PlanLine[];
+  public productId: string;
 
   public constructor(data: Partial<Plan> = {}) {
     Object.assign(this, data);
@@ -81,6 +82,7 @@ export class ProductService {
       if (plan == null) {
         plan = new Plan({
           id: line.planId,
+          productId: line.productId,
           lines: []
         });
         product.plans.push(plan);

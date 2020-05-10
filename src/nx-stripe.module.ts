@@ -4,6 +4,7 @@ import {AppController} from './app.controller';
 import {SERVER_CONFIG_TOKEN, ServerConfiguration} from './nx-stripe.module.di';
 import {CustomerService} from './customer.service';
 import {SubscriptionService} from './subscription.service';
+import {UsageService} from './usage.service';
 
 
 @Module({
@@ -29,6 +30,7 @@ export class NxStripeModule {
         ProductService,
         CustomerService,
         SubscriptionService,
+        UsageService,
       ],
       exports: [],
     };
@@ -37,3 +39,4 @@ export class NxStripeModule {
 
 
 // TODO @RMA stripe error handling
+// TODO @RMA guards for admin (products write) / customer (subscriptions) / system (customer, usages)
