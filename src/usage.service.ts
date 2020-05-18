@@ -20,14 +20,16 @@ export class UsageService {
     // TODO @RMA check subscription status
     // TODO @RMA check null result
     // TODO @RMA add typing
+    // TODO @RMA handle errors
+    // TODO @RMA create mapper library ?
     const subscriptionItem: any = await this.subscriptionService.findSubscriptionItemByCustomerIdAndFeatureId(customerId, featureId);
 
     return this.stripe.subscriptionItems.createUsageRecord(subscriptionItem.id, {
       quantity: 1,
       timestamp: StripeTimestamp.toTimestamp(new Date()),
-      action: 'increment'
+      action: 'increment',
     }, {
-      idempotencyKey
+      idempotencyKey,
     });
   }
 }

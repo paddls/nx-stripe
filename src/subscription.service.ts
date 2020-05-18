@@ -20,6 +20,7 @@ export class SubscriptionService {
   public async create(customerId: string, planId: string): Promise<any> {
     // TODO @RMA add typing
     // TODO @RMA avoid duplicate product subscription
+    // TODO @RMA handle plan not found
     const plan: Plan = await this.productService.getPlanById(planId);
 
     return this.stripe.subscriptions.create({
